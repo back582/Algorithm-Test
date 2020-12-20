@@ -1,0 +1,57 @@
+[CPP]
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+vector<int> solution(vector<int> arr) 
+{
+    arr.erase(unique(arr.begin(),arr.end()),arr.end());
+    
+    //vector<int>::iterator iter = arr.begin();
+    //arr.erase(iter);
+    
+    //아래처럼하면 시간초과
+    /*
+    for(int i=1; i<arr.size(); i++){
+        if(arr[i-1]==arr[i]){
+            arr.erase(arr.begin()+i);
+            --i;
+        }
+    }
+    */
+    return arr;
+}
+
+/////////////////////////////////////////////////////////
+[JAVA]
+import java.util.*;
+
+public class Solution {
+    public int[] solution(int []arr) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.add(arr[0]);
+        for(int i =1; i<arr.length; i++){
+            if(arr[i-1]!=arr[i]){
+                list.add(arr[i]);
+            }
+        }
+        int[] answer = new int[list.size()];
+        for(int i=0; i<answer.length; i++){
+            answer[i]=list.get(i);
+        }
+        return answer;
+    }
+}
+
+/////////////////////////////////////////////////////
+[PYTHON]
+def solution(arr):
+    answer = [arr[0]]
+    
+    for i in range(1,len(arr)):
+        if arr[i-1]!=arr[i]:
+            answer.append(arr[i])
+
+    return answer
