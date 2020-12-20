@@ -1,0 +1,87 @@
+
+[PYTHON]
+def solution(n, lost, reserve):
+    answer = 0
+    count = []
+    for i in range(n):
+        count.append(1)
+        
+    for i in reserve:
+        count[i-1] +=1
+    for i in lost:
+        count[i-1] -=1
+        
+    if count[0]>1 and count[1]<1:
+        count[0] -=1
+        count[1] +=1
+    if count[len(count)-1]>1 and count[len(count)-2]<1:
+        count[len(count)-1] -=1
+        count[len(count)-2] +=1
+        
+    for i in range(1,len(count)-1):
+        if count[i]>1:
+            if count[i-1]<1:
+                count[i]-=1
+                count[i-1]+=1
+            elif count[i+1]<1:
+                count[i]-=1
+                count[i+1]+=1
+    
+    answer +=count.count(1)
+    answer +=count.count(2)
+        
+    return answer
+    
+///////////////////////////////////////////////////////////////////////////////    
+    
+[CPP]
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int solution(int n, vector<int> lost, vector<int> reserve) {
+    int answer = 0;
+    vector<int> count(n,1);
+    //우선 여분을 갖고있는 학생들을 입력
+    for(int i=0; i<reserve.size(); i++){
+        count[reserve[i]-1] += 1;
+    }
+    //잃어버린애들 뺐어
+    for(int i=0; i<lost.size(); i++){
+        count[lost[i]-1] -=1;
+    }
+    //첫번째랑
+    if(count[0]>1 && count[1]<1){
+        count[0] -=1;
+        count[1] +=1;
+    }
+    //마지막애가 여분있으면 나눠줘
+    if(count[count.size()-1]>1 && count[count.size()-2]<1){
+        count[count.size()-1] -=1;
+        count[count.size()-2] +=1;
+    }
+    //여분의 옷을 불쌍한들한테 나눠 줍니다. 근데 이정도면 얘네가 훔쳐간거 아님?
+    for(int i=1; i<count.size()-1; i++){
+        if(count[i]>1){
+            if(count[i-1]<1){
+                count[i]-=1;
+                count[i-1]+=1;
+            }
+            else if(count[i+1]<1){
+                count[i]-=1;
+                count[i+1]+=1;
+            }
+        }
+    }
+    //옷갖고있는 학생들 counting
+    for(int i=0; i<count.size(); i++){
+        if(count[i]>0){
+            ++answer;
+        }
+    }
+    
+    return answer;
+}
