@@ -1,0 +1,37 @@
+
+import java.util.*;
+import java.io.*;
+public class Solution {
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        for (int allcnt = 1; allcnt<= 10; allcnt++) {
+            int[][] map = new int[100][100];
+            int Tc = Integer.parseInt(br.readLine());
+            for (int i = 0; i < map.length; i++) {
+                StringTokenizer st = new StringTokenizer(br.readLine());
+                for (int j = 0; j < map[i].length; j++) {
+                    map[i][j] = Integer.parseInt(st.nextToken());
+                }
+            }
+            int index_y = 99;
+            int index_x = 0;
+            for (index_x = 0; index_x < map[index_y].length; index_x++) {
+                if (map[index_y][index_x] == 2) {
+                    break;
+                }
+            }
+            while(index_y>0) {
+                if(index_x-1>=0 && map[index_y][index_x-1] ==1)
+                    index_x--;
+                else if(index_x+1<100 && map[index_y][index_x+1] ==1)
+                    index_x++;
+                else
+                    index_y--;
+                map[index_y][index_x]=2;
+            }
+            bw.write("#"+allcnt+" "+index_x+"\n");
+        }
+        bw.flush();
+    }
+}
