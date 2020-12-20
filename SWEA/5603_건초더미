@@ -1,0 +1,28 @@
+
+#include <iostream>
+#include <algorithm>
+#include <math.h>
+using namespace std;
+int main(void)
+{
+    int Tc = 0;
+    cin >> Tc;
+    for (int allcnt = 1; allcnt <= Tc; allcnt++) {
+        int N = 0;
+        int avg = 0;
+        int result = 0;
+        cin >> N;
+        int arr[10000] = { 0 };
+        for (int i = 0; i < N; i++) {
+            cin >> arr[i];
+            avg += arr[i];
+        }
+        avg /= N;
+        sort(arr, arr + N);
+        for (int i = 0; i < N; i++) {
+            if(arr[i]<avg) result += abs(arr[i] - avg);
+        }
+        cout << "#" << allcnt << " " << result << endl;
+    }
+    return 0;
+}
