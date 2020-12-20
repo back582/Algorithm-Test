@@ -1,0 +1,45 @@
+[PYTHON]
+def solution(s):
+    answer = ''
+    if len(s) %2 == 1:
+        answer = s[int(len(s)/2)]
+    else:
+        answer += s[int(len(s)/2)-1]
+        answer += s[int(len(s)/2)]
+    return answer
+    
+/////////////////////////////////////////////////
+[CPP]
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string solution(string s) {
+    string answer = "";
+    if(s.size()%2==1){
+        answer = s[s.size()/2];
+    }
+    else{
+        answer = s[s.size()/2-1];
+        answer+=s[s.size()/2];
+    }
+    return answer;
+}
+
+/////////////////////////////////////////////////
+[JAVA]
+//java는 substring도 먹고 charAt도 먹네요
+class Solution {
+    public String solution(String s) {
+        String answer = "";
+        if(s.length()%2==1){
+            answer = s.substring(s.length()/2,s.length()/2+1);
+        }
+        else{
+            answer +=s.charAt(s.length()/2-1);
+            answer +=s.charAt(s.length()/2);
+        }
+        return answer;
+    }
+}
