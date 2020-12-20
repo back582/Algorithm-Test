@@ -1,0 +1,24 @@
+
+import java.util.*;
+import java.io.*;
+public class Solution { //7829
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int Tc = Integer.parseInt(br.readLine());
+        for(int allcnt=1; allcnt<=Tc; allcnt++) {
+            int P = Integer.parseInt(br.readLine());    //count of divisor.
+            int result=0;
+            int[] arr = new int[P];
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            for(int i=0; i<P; i++) {
+                arr[i] = Integer.parseInt(st.nextToken());
+            }
+            Arrays.sort(arr);
+            if(P==1) result=arr[0]*arr[0];
+            else result=arr[0]*arr[P-1];
+            bw.write("#"+allcnt+" "+result+"\n");
+        }
+        bw.flush();
+    }
+}
