@@ -1,0 +1,66 @@
+
+import java.io.*;
+import java.util.*;
+class TMT {
+	int y;
+	int x;
+
+	public TMT(int y, int x) {
+		this.y = y;
+		this.x = x;
+	}
+}
+public class Main {
+	static int N;
+	static int M;
+	static int[][] map;
+	static boolean[][] visit;
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		M = Integer.parseInt(st.nextToken());
+		N = Integer.parseInt(st.nextToken());
+		map = new int[N][M];
+		visit = new boolean[N][M];
+		Queue<TMT> q = new LinkedList<TMT>();
+		for (int i = 0; i < N; i++) {
+			st = new StringTokenizer(br.readLine());
+			for (int j = 0; j < M; j++) {
+				map[i][j] = Integer.parseInt(st.nextToken());
+				if (map[i][j] == 1)
+					q.add(new TMT(i, j));
+			}
+		}
+		int[] dy = { -1, 0, 1, 0 };
+		int[] dx = { 0, 1, 0, -1 };
+		int level = -1;
+		while (!q.isEmpty()) {
+			level++;
+			int size = q.size();
+			for (int all = 0; all < size; all++) {
+				TMT tmt = q.poll();
+				int y = tmt.y;
+				int x = tmt.x;
+				if (map[y][x] == 1) {
+					for (int d = 0; d < 4; d++) {
+						int ny = y + dy[d];
+						int nx = x + dx[d];
+						if (ny >= 0 && nx >= 0 && ny < N && nx < M && visit[ny][nx] == false && map[ny][nx] == 0) {
+							map[ny][nx] = 1;
+							visit[ny][nx] = true;
+							q.add(new TMT(ny, nx));
+						}
+					}
+				}
+			}
+		}
+		for(int i=0; i<N; i++) {
+			for(int j=0; j<M; j++) {
+				if(map[i][j]==0) level=-1;
+			}
+		}
+		bw.write(level + "\n");
+		bw.flush();
+	}
+}
