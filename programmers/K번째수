@@ -1,0 +1,27 @@
+[CPP]
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+
+vector<int> solution(vector<int> array, vector<vector<int>> commands) {
+    vector<int> answer;
+    vector<vector<int>> befor(commands.size());
+    
+    for(int i=0; i<commands.size(); i++){
+        for(int j=commands[i][0]-1; j<=commands[i][1]-1; j++){
+            befor[i].push_back(array[j]);
+        }
+        
+        sort(befor[i].begin(), befor[i].end());
+        answer.push_back(befor[i][commands[i][2]-1]);
+    }
+    return answer;
+}
+
+//////////////////////////////////////////////////////////
+[PYTHON]
+def solution(array, commands):
+    return list(map(lambda x:sorted(array[x[0]-1:x[1]])[x[2]-1], commands))
