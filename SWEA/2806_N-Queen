@@ -1,0 +1,53 @@
+
+import java.util.*;
+public class Solution {
+ 
+    static int cnt = 0;
+ 
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int Tc = sc.nextInt();
+        for (int allcnt = 1; allcnt <= Tc; allcnt++) {
+            cnt=0;
+            int N = sc.nextInt();
+            int[][] map = new int[N][N];
+            backtrack(map, 0);
+            System.out.println("#"+allcnt+" "+cnt);
+        }
+    }
+    // 이렇게 해야 경우의수를 다 검사하지 않고 할 수 있따.
+    // idx는 현재 퀸을 배치하려고 하는 행
+    public static void backtrack(int[][] arr, int idx) {
+        if (idx == arr.length) {
+            cnt++;
+            return;
+        }
+        // 해당행의 열의 갯수 만큼 반복하며 해당 열에 퀸을 배치하고 다음 행 재귀호출
+        for (int i = 0; i < arr[idx].length; i++) {
+            if (canBeNQ(arr, idx, i)) {
+                arr[idx][i] = 1;
+                backtrack(arr, idx + 1);
+                arr[idx][i] = 0;
+            }
+        }
+    }
+    // r, c 자리에 퀸을 놓았을때 기존의 퀸과 충돌이 있는지 없는지 검사
+    static boolean canBeNQ(int[][] arr, int r, int c) {
+        // 위로 올라가면서 또다른 퀸을 만나면 리턴 false
+        for (int i = r - 1; i >= 0; i--) {
+            if (arr[i][c] == 1)
+                return false;
+        }
+        // 좌상으로 올라가면서 또다른 퀸을 만나면 리턴 false
+        for (int i = r - 1, j = c - 1; i >= 0 && j >= 0; i--, j--) {
+            if (arr[i][j] == 1)
+                return false;
+        }
+        // 우상으로 올라가면서 또다른 퀸을 만나면 리턴 false
+        for (int i = r - 1, j = c + 1; i >= 0 && j < arr[i].length; i--, j++) {
+            if (arr[i][j] == 1)
+                return false;
+        }
+        return true;
+    }
+}
