@@ -1,0 +1,32 @@
+[CPP]
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+
+string solution(vector<string> participant, vector<string> completion) {
+    string answer = "";
+    sort(participant.begin(), participant.end());
+    sort(completion.begin(), completion.end());
+    
+    int cnt = 0;
+    while(!answer.empty()){
+        if(participant[cnt]!=completion[cnt]){
+            return answer = participant[cnt];
+        }
+        ++cnt;
+    }
+}
+
+
+/////////////////////////////////////////////////////////////////////
+
+
+[PYTHON]
+import collections
+
+def solution(participant, completion):
+    answer = collections.Counter(participant) - collections.Counter(completion)             
+    return list(answer.keys())[0]
