@@ -1,0 +1,23 @@
+
+import java.io.*;
+public class Solution {
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int Tc = Integer.parseInt(br.readLine());
+        for(int allcnt=1; allcnt<=Tc; allcnt++) {
+            String str = br.readLine();
+            String[] arr = new String[3];
+            arr[0] = str.substring(0,4);
+            arr[1] = str.substring(4,6);
+            arr[2] = str.substring(6,8);
+            if(Integer.parseInt(arr[1])<=0 || Integer.parseInt(arr[1])>12 || Integer.parseInt(arr[2])<=0 || Integer.parseInt(arr[2])>31 ||
+                    Integer.parseInt(arr[1])==4 && Integer.parseInt(arr[2])>30 || Integer.parseInt(arr[1])==6 && Integer.parseInt(arr[2])>30 || Integer.parseInt(arr[1])==9 && Integer.parseInt(arr[2])>30 || Integer.parseInt(arr[1])==11 && Integer.parseInt(arr[2])>30 ||
+                    Integer.parseInt(arr[1])==2 && Integer.parseInt(arr[2])>28) {
+                System.out.println("#"+allcnt+" "+-1);
+            }
+            else {
+                System.out.println("#"+allcnt+" "+arr[0]+"/"+arr[1]+"/"+arr[2]);
+            }
+        }
+    }
+}
