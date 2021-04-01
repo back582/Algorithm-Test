@@ -1,0 +1,59 @@
+CPP
+-------------------------------------------------------------------
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+string solution(string new_id) {
+    //1
+    for(int i=0; i<new_id.length(); i++){
+        if(new_id[i]>64 && new_id[i]<91){
+            new_id[i] +=32;
+        }
+    }
+    //2
+    for(int i=0; i<new_id.length(); i++){
+        if(new_id[i]>96 && new_id[i]<123){
+            continue;
+        }
+        else if(new_id[i]>47 && new_id[i]<58){
+            continue;
+        }
+        else if(new_id[i]=='-' || new_id[i]=='_' || new_id[i]=='.'){
+            continue;
+        }
+        new_id.erase(i,1);
+        i--;
+    }
+    //3
+    for(int i=0; i<new_id.length()-1; i++){
+        if(new_id[i]=='.' && new_id[i]==new_id[i+1]){
+            new_id.erase(i,1);
+            i--;
+        }
+    }
+    //4
+    while(new_id[0]=='.'){
+        new_id.erase(0,1);
+    }
+    while(new_id[new_id.length()-1]=='.'){
+        new_id.erase(new_id.length()-1,1);
+    }
+    //5
+    if(new_id.empty()) new_id='a';
+    //6
+    if(new_id.size()>=16){
+        new_id.erase(15);
+        if(new_id[new_id.length()-1]=='.'){
+            new_id.erase(new_id.length()-1,1);
+        }
+    }
+    //7
+    while(new_id.length()<=2){
+        new_id+=new_id[new_id.length()-1];
+    }
+    return new_id;
+}
