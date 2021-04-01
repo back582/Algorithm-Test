@@ -1,0 +1,29 @@
+CPP
+------------------------------------------------------------------
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int solution(vector<int> nums)
+{
+    vector<bool> can(200001, false);
+    vector<int> pickv;
+    int answer = 0;
+    for(int i=0; i<nums.size(); i++){
+        if(can[nums[i]]==false){
+            can[nums[i]]=true;
+            pickv.push_back(nums[i]);
+        }
+    }
+    
+    if(pickv.size()<=nums.size()/2){
+        answer=pickv.size();
+    }
+    else{
+        answer=nums.size()/2;
+    }
+    
+    return answer;
+}
