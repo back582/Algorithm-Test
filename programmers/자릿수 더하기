@@ -1,0 +1,48 @@
+CPP
+-------------------------------------------------------
+#include <iostream>
+
+using namespace std;
+int solution(int n)
+{
+    int answer = 0;
+
+    while(n>0){
+        answer += n%10;
+        n /=10;
+    }
+
+    return answer;
+}
+
+
+
+JAVA
+---------------------------------------------------
+import java.util.*;
+
+public class Solution {
+    public int solution(int n) {
+        int answer = 0;
+
+        while(n>0){
+            answer += n%10;
+            n /= 10;
+        }
+
+        return answer;
+    }
+}
+
+
+
+PYTHON
+-------------------------------------------------------
+def solution(n):
+    answer = 0
+
+    while n>0:
+        answer += (int)(n%10)
+        n /=10
+
+    return answer
